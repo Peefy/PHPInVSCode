@@ -15,8 +15,8 @@ PHP 代码在服务器上执行，结果以纯 HTML 形式返回给浏览器
 * PHP 可以创建、打开、读取、写入、关闭服务器上的文件
 * PHP 可以收集表单数据
 * PHP 可以发送和接收 cookies
-* PHP 可以添加、删除、修改您的数据库中的数据
-* PHP 可以限制用户访问您的网站上的一些页面
+* PHP 可以添加、删除、修改的数据库中的数据
+* PHP 可以限制用户访问的网站上的一些页面
 * PHP 可以加密数据
 
 ## PHP语法
@@ -123,7 +123,7 @@ echo "变量 y 为: $y";
 
 global 关键字用于函数内访问全局变量。
 
-在函数内调用函数外定义的全局变量，我们需要在函数中的变量前加上 global 关键字：
+在函数内调用函数外定义的全局变量，需要在函数中的变量前加上 global 关键字：
 
 ```php
 <?php
@@ -294,7 +294,7 @@ var_dump($x);
 ?>
 ```
 
-**PHP 浮点型**-浮点数是带小数部分的数字，或是指数形式。在以下实例中我们将测试不同的数字。 
+**PHP 浮点型**-浮点数是带小数部分的数字，或是指数形式。在以下实例中将测试不同的数字。 
 
 ```php
 <?php 
@@ -327,7 +327,7 @@ var_dump($cars);
 ?>
 ```
 
-**PHP 对象**-对象数据类型也可以用于存储数据。在 PHP 中，对象必须声明。首先，必须使用class关键字声明类对象。类是可以包含属性和方法的结构。然后我们在类中定义数据类型，然后在实例化的类中使用数据类型：
+**PHP 对象**-对象数据类型也可以用于存储数据。在 PHP 中，对象必须声明。首先，必须使用class关键字声明类对象。类是可以包含属性和方法的结构。然后在类中定义数据类型，然后在实例化的类中使用数据类型：
 
 ```php
 <?php
@@ -1379,4 +1379,656 @@ $obj = new OtherSubClass();
 
 ## PHP日期
 
+PHP `date()` 函数用于格式化时间/日期。date() 函数可把时间戳格式化为可读性更好的日期和时间。时间戳是一个字符序列，表示一定的事件发生的日期/时间。
 
+语法如下：
+
+```php
+string date ( string $format [, int $timestamp ] )
+```
+
+* format	必需。规定时间戳的格式。
+* timestamp	可选。规定时间戳。默认是当前的日期和时间。
+
+**PHP Date() - 格式化日期**-date() 函数的第一个必需参数 format 规定了如何格式化日期/时间。
+
+* d - 代表月中的天 (01 - 31)
+* m - 代表月 (01 - 12)
+* Y - 代表年 (四位数)
+
+```php
+<?php
+echo date("Y/m/d") . "<br>";
+echo date("Y.m.d") . "<br>";
+echo date("Y-m-d");
+?>
+```
+
+format 字符	|说明|	返回值例子
+-|-|-
+日|	---|	---
+d|	月份中的第几天，有前导零的 2 位数字	|01 到 31
+D|	星期中的第几天，文本表示，3 个字母|	Mon 到 Sun
+j|	月份中的第几天，没有前导零	|1 到 31
+l（"L"的小写字母）|	星期几，完整的文本格式|Sunday 到 Saturday
+N|	ISO-8601 格式数字表示的星期中的第几天（PHP 5.1.0 新加）|	1（表示星期一）到 7（表示星期天）
+S|	每月天数后面的英文后缀，2 个字符|	st，nd，rd 或者 th。可以和 j 一起用
+w|	星期中的第几天，数字表示|0（表示星期天）到 6（表示星期六）
+z|	年份中的第几天	|0 到 365
+星期|	---|	---
+W|	ISO-8601 格式年份中的第几周，每周从星期一开始（PHP 4.1.0 新加的）	|例如：42（当年的第 42 周）
+月|	---|	---
+F|	月份，完整的文本格式|例如 January 或者 March	January 到 December
+m|	数字表示的月份，有前导零	|01 到 12
+M|	三个字母缩写表示的月份|	Jan 到 Dec
+n|	数字表示的月份，没有前导零|	1 到 12
+t|	给定月份所应有的天数	|28 到 31
+年|	---	---
+L	|是否为闰年	|如果是闰年为 1，否则为 0
+o	|ISO-8601 格式年份数字。这和 Y 的值相同，只除了如果 ISO 的星期数（W）属于前一年或下一年，则用那一年。（PHP 5.1.0 新加）|	Examples: 1999 or 2003
+Y|	4 位数字完整表示的年份	|例如：1999 或 2003
+y|	2 位数字表示的年份	|例如：99 或 03
+时间|	---	|---
+a|	小写的上午和下午值	|am 或 pm
+A|	大写的上午和下午值	|AM 或 PM
+B|	Swatch Internet 标准时	|000 到 999
+g|	小时，12 小时格式，没有前导零	|1 到 12
+G|	小时，24 小时格式，没有前导零	|0 到 23
+h|	小时，12 小时格式，有前导零	|01 到 12
+H|	小时，24 小时格式，有前导零	|00 到 23
+i|	有前导零的分钟数	|00 到 59>
+s|	秒数，有前导零|	00 到 59>
+u|	毫秒 （PHP 5.2.2 新加）。需要注意的是 date() 函数总是返回 000000 因为它只接受 integer 参数， 而 DateTime::format() 才支持毫秒。	|示例: 654321
+时区|	---|	---
+e|	时区标识（PHP 5.1.0 新加）	|例如：UTC，GMT，Atlantic/Azores
+I|	是否为夏令时	|如果是夏令时为 1，否则为 0
+O|	与格林威治时间相差的小时数	|例如：+0200
+P|	与格林威治时间（GMT）的差别，小时和分钟之间有冒号分隔（PHP 5.1.3 新加）	|例如：+02:00
+T|	本机所在的时区|	例如：EST，MDT（【译者注】在 Windows 下为完整文本格式，例如"Eastern Standard Time"，中文版会显示"中国标准时间"）。
+Z|	时差偏移量的秒数。UTC 西边的时区偏移量总是负的，UTC 东边的时区偏移量总是正的。	|-43200 到 43200
+完整的日期／时间|	---|	---
+c|	ISO 8601 格式的日期（PHP 5 新加）|	2004-02-12T15:19:21+00:00
+r|	RFC 822 格式的日期|	例如：Thu, 21 Dec 2000 16:01:07 +0200
+U|	从 Unix 纪元（January 1 1970 00:00:00 GMT）开始至今的秒数	|参见 time()
+
+## PHP 包含文件
+
+在 PHP 中，可以在服务器执行 PHP 文件之前在该文件中插入一个文件的内容。
+
+include 和 require 语句用于在执行流中插入写在其他文件中的有用的代码。
+
+include 和 require 除了处理错误的方式不同之外，在其他方面都是相同的：
+
+* require 生成一个致命错误（E_COMPILE_ERROR），在错误发生后脚本会停止执行。
+* include 生成一个警告（E_WARNING），在错误发生后脚本会继续执行。
+  
+因此，如果希望继续执行，并向用户输出结果，即使包含文件已丢失，那么请使用 include。否则，在框架、CMS 或者复杂的 PHP 应用程序编程中，请始终使用 require 向执行流引用关键文件。这有助于提高应用程序的安全性和完整性，在某个关键文件意外丢失的情况下。
+
+包含文件省去了大量的工作。这意味着可以为所有网页创建标准页头、页脚或者菜单文件。然后，在页头需要更新时，只需更新这个页头包含文件即可。
+
+include 和 require 的区别
+
+* require 一般放在 PHP 文件的最前面，程序在执行前就会先导入要引用的文件；
+* include 一般放在程序的流程控制中，当程序执行时碰到才会引用，简化程序的执行流程。
+* require 引入的文件有错误时，执行会中断，并返回一个致命错误；
+* include 引入的文件有错误时，会继续执行，并返回一个警告。
+
+```php
+<html>
+<head>
+<meta charset="utf-8">
+<title>dugu</title>
+</head>
+<body>
+
+<?php include 'header.php'; ?>
+<h1>欢迎来到主页!</h1>
+<p>一个段落文本</p>
+
+</body>
+</html>
+```
+
+## PHP 文件处理
+
+`fopen()` 函数用于在 PHP 中打开文件。
+
+```php
+<html>
+<body>
+
+<?php
+$file=fopen("test.txt","r");
+?>
+
+</body>
+</html>
+```
+
+模式|	描述
+-|-
+r|	只读。在文件的开头开始。
+r+|	读/写。在文件的开头开始。
+w|	只写。打开并清空文件的内容；如果文件不存在，则创建新文件。
+w+|	读/写。打开并清空文件的内容；如果文件不存在，则创建新文件。
+a|	追加。打开并向文件末尾进行写操作，如果文件不存在，则创建新文件。
+a+|	读/追加。通过向文件末尾写内容，来保持文件内容。
+x|	只写。创建新文件。如果文件已存在，则返回 FALSE 和一个错误。
+x+|	读/写。创建新文件。如果文件已存在，则返回 FALSE 和一个错误。
+
+**PHP 文件上传**
+
+```php
+<html>
+<head>
+<meta charset="utf-8">
+<title>菜鸟教程(runoob.com)</title>
+</head>
+<body>
+
+<form action="upload_file.php" method="post" enctype="multipart/form-data">
+    <label for="file">文件名：</label>
+    <input type="file" name="file" id="file"><br>
+    <input type="submit" name="submit" value="提交">
+</form>
+
+</body>
+</html>
+```
+
+## PHP Cookie
+
+cookie 常用于识别用户。cookie 是一种服务器留在用户计算机上的小文件。每当同一台计算机通过浏览器请求页面时，这台计算机将会发送 cookie。通过 PHP，能够创建并取回 cookie 的值。
+
+```php
+<?php
+setcookie("user", "runoob", time()+3600);
+?>
+<html>
+```
+
+取回cookie的值
+
+```php
+<?php
+// 输出 cookie 值
+echo $_COOKIE["user"];
+
+// 查看所有 cookie
+print_r($_COOKIE);
+?>
+```
+
+```php
+<html>
+<head>
+<meta charset="utf-8">
+<title>菜鸟教程(runoob.com)</title>
+</head>
+<body>
+
+<?php
+if (isset($_COOKIE["user"]))
+    echo "欢迎 " . $_COOKIE["user"] . "!<br>";
+else
+    echo "普通访客!<br>";
+?>
+
+</body>
+</html>
+```
+
+删除 Cookie
+
+```php
+<?php
+// 设置 cookie 过期时间为过去 1 小时
+setcookie("user", "", time()-3600);
+?>
+```
+
+## PHP Session
+
+PHP session 变量用于存储关于用户会话（session）的信息，或者更改用户会话（session）的设置。Session 变量存储单一用户的信息，并且对于应用程序中的所有页面都是可用的。
+
+在计算机上操作某个应用程序时，用户打开它，做些更改，然后关闭它。这很像一次对话（Session）。计算机知道用户是谁。它清楚用户在何时打开和关闭应用程序。然而，在因特网上问题出现了：由于 HTTP 地址无法保持状态，Web 服务器并不知道用户是谁以及用户做了什么。
+
+PHP session 解决了这个问题，它通过在服务器上存储用户信息以便随后使用（比如用户名称、购买商品等）。然而，会话信息是临时的，在用户离开网站后将被删除。如果用户需要永久存储信息，可以把数据存储在数据库中。
+
+Session 的工作机制是：为每个访客创建一个唯一的 id (UID)，并基于这个 UID 来存储变量。UID 存储在 cookie 中，或者通过 URL 进行传导。
+
+```php
+<?php session_start(); ?>
+ 
+<html>
+<body>
+ 
+</body>
+</html>
+```
+
+存储和取回 session 变量的正确方法是使用 PHP $_SESSION 变量：
+
+```php
+<?php
+session_start();
+// 存储 session 数据
+$_SESSION['views']=1;
+?>
+
+<?php
+// 检索 session 数据
+echo "浏览量：". $_SESSION['views'];
+?>
+```
+
+在下面的实例中，创建了一个简单的 page-view 计数器。isset() 函数检测是否已设置 "views" 变量。如果已设置 "views" 变量，累加计数器。如果 "views" 不存在，则创建 "views" 变量，并把它设置为 1：
+
+```php
+<?php
+session_start();
+ 
+if(isset($_SESSION['views']))
+{
+    $_SESSION['views']=$_SESSION['views']+1;
+}
+else
+{
+    $_SESSION['views']=1;
+}
+echo "浏览量：". $_SESSION['views'];
+?>
+```
+
+如果希望删除某些 session 数据，可以使用 unset() 或 session_destroy() 函数。
+
+unset() 函数用于释放指定的 session 变量：
+
+```php
+<?php
+session_start();
+if(isset($_SESSION['views']))
+{
+    unset($_SESSION['views']);
+}
+?>
+```
+
+也可以通过调用 session_destroy() 函数彻底销毁 session：
+
+```php
+<?php
+session_destroy();
+?>
+```
+
+## PHP 错误处理
+
+在 PHP 中，默认的错误处理很简单。一条错误消息会被发送到浏览器，这条消息带有文件名、行号以及描述错误的消息。
+
+不同的错误处理方法：
+
+* 简单的 "die()" 语句
+* 自定义错误和错误触发器
+* 错误报告
+
+```php
+<?php
+if(!file_exists("welcome.txt"))
+{
+    die("文件不存在");
+}
+else
+{
+    $file=fopen("welcome.txt","r");
+}
+?>
+```
+
+```php
+function customError($errno, $errstr)
+{
+    echo "<b>Error:</b> [$errno] $errstr<br>";
+    echo "脚本结束";
+    die();
+}
+```
+
+## PHP 异常处理
+
+异常用于在指定的错误发生时改变脚本的正常流程。
+
+异常的规则
+
+* 需要进行异常处理的代码应该放入 try 代码块内，以便捕获潜在的异常。
+* 每个 try 或 throw 代码块必须至少拥有一个对应的 catch 代码块。
+* 使用多个 catch 代码块可以捕获不同种类的异常。
+* 可以在 try 代码块内的 catch 代码块中抛出（再次抛出）异常。
+
+```php
+<?php
+// 创建一个有异常处理的函数
+function checkNum($number)
+{
+    if($number>1)
+    {
+        throw new Exception("Value must be 1 or below");
+    }
+    return true;
+}
+ 
+// 触发异常
+checkNum(2);
+?>
+```
+
+```php
+<?php
+// 创建一个有异常处理的函数
+function checkNum($number)
+{
+    if($number>1)
+    {
+        throw new Exception("变量值必须小于等于 1");
+    }
+        return true;
+}
+    
+// 在 try 块 触发异常
+try
+{
+    checkNum(2);
+    // 如果抛出异常，以下文本不会输出
+    echo '如果输出该内容，说明 $number 变量';
+}
+// 捕获异常
+catch(Exception $e)
+{
+    echo 'Message: ' .$e->getMessage();
+}
+?>
+```
+
+创建一个自定义的 Exception 类
+
+```php
+<?php
+class customException extends Exception
+{
+    public function errorMessage()
+    {
+        // 错误信息
+        $errorMsg = '错误行号 '.$this->getLine().' in '.$this->getFile()
+        .': <b>'.$this->getMessage().'</b> 不是一个合法的 E-Mail 地址';
+        return $errorMsg;
+    }
+}
+ 
+$email = "someone@example...com";
+ 
+try
+{
+    // 检测邮箱
+    if(filter_var($email, FILTER_VALIDATE_EMAIL) === FALSE)
+    {
+        // 如果是个不合法的邮箱地址，抛出异常
+        throw new customException($email);
+    }
+}
+ 
+catch (customException $e)
+{
+//display custom message
+echo $e->errorMessage();
+}
+?>
+```
+
+set_exception_handler() 函数可设置处理所有未捕获异常的用户定义函数。
+
+```php
+<?php
+function myException($exception)
+{
+    echo "<b>Exception:</b> " , $exception->getMessage();
+}
+ 
+set_exception_handler('myException');
+ 
+throw new Exception('Uncaught Exception occurred');
+?>
+```
+
+## PHP过滤器
+
+如需过滤变量，请使用下面的过滤器函数之一：
+
+* filter_var() - 通过一个指定的过滤器来过滤单一的变量
+* filter_var_array() - 通过相同的或不同的过滤器来过滤多个变量
+* filter_input - 获取一个输入变量，并对它进行过滤
+* filter_input_array - 获取多个输入变量，并通过相同的或不同的过滤器对它们进行过滤
+
+```php
+<?php
+$int = 123;
+ 
+if(!filter_var($int, FILTER_VALIDATE_INT))
+{
+    echo("不是一个合法的整数");
+}
+else
+{
+    echo("是个合法的整数");
+}
+?>
+```
+
+有两种过滤器：
+
+Validating 过滤器：
+
+* 用于验证用户输入
+* 严格的格式规则（比如 URL 或 E-Mail 验证）
+* 如果成功则返回预期的类型，如果失败则返回 FALSE
+  
+Sanitizing 过滤器：
+
+* 用于允许或禁止字符串中指定的字符
+* 无数据格式规则
+* 始终返回字符串
+
+```php
+<?php
+$var=300;
+ 
+$int_options = array(
+    "options"=>array
+    (
+        "min_range"=>0,
+        "max_range"=>256
+    )
+);
+ 
+if(!filter_var($var, FILTER_VALIDATE_INT, $int_options))
+{
+    echo("不是一个合法的整数");
+}
+else
+{
+    echo("是个合法的整数");
+}
+?>
+```
+
+过滤多个输入
+
+```php
+<?php
+$filters = array
+(
+    "name" => array
+    (
+        "filter"=>FILTER_SANITIZE_STRING
+    ),
+    "age" => array
+    (
+        "filter"=>FILTER_VALIDATE_INT,
+        "options"=>array
+        (
+            "min_range"=>1,
+            "max_range"=>120
+        )
+    ),
+    "email"=> FILTER_VALIDATE_EMAIL
+);
+ 
+$result = filter_input_array(INPUT_GET, $filters);
+ 
+if (!$result["age"])
+{
+    echo("年龄必须在 1 到 120 之间。<br>");
+}
+elseif(!$result["email"])
+{
+    echo("E-Mail 不合法<br>");
+}
+else
+{
+    echo("输入正确");
+}
+?>
+```
+
+使用 Filter Callback。通过使用 FILTER_CALLBACK 过滤器，可以调用自定义的函数，把它作为一个过滤器来使用。这样，就拥有了数据过滤的完全控制权。
+
+```php
+<?php
+function convertSpace($string)
+{
+    return str_replace("_", ".", $string);
+}
+ 
+$string = "www_runoob_com!";
+ 
+echo filter_var($string, FILTER_CALLBACK,
+array("options"=>"convertSpace"));
+?>
+```
+
+检测一个数字是否在一个范围内
+
+```php
+<?php
+$int = 122;
+$min = 1;
+$max = 200;
+
+if (filter_var($int, FILTER_VALIDATE_INT, array("options" => array("min_range"=>$min, "max_range"=>$max))) === false) {
+    echo("变量值不在合法范围内");
+} else {
+    echo("变量值在合法范围内");
+}
+?>
+```
+
+检测 IPv6 地址
+
+```php
+<?php
+$ip = "2001:0db8:85a3:08d3:1319:8a2e:0370:7334";
+
+if (!filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV6) === false) {
+    echo("$ip 是一个 IPv6 地址");
+} else {
+    echo("$ip 不是一个 IPv6 地址");
+}
+?>
+```
+
+检测 URL - 必须包含QUERY_STRING（查询字符串）
+
+```php
+<?php
+$url = "http://www.baidu.com";
+
+if (!filter_var($url, FILTER_VALIDATE_URL, FILTER_FLAG_QUERY_REQUIRED) === false) {
+    echo("$url 是一个合法的 URL");
+} else {
+    echo("$url 不是一个合法的 URL");
+}
+?>
+```
+
+移除 ASCII 值大于 127 的字符
+
+```php
+<?php
+$str = "<h1>Hello WorldÆØÅ!</h1>";
+
+$newstr = filter_var($str, FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_HIGH);
+echo $newstr;
+?>
+```
+
+## PHP JSON
+
+函数|	描述
+-|-
+json_encode|	对变量进行 JSON 编码
+json_decode|	对 JSON 格式的字符串进行解码，转换为 PHP 变量
+json_last_error|	返回最后发生的错误
+
+```php
+<?php
+   $arr = array('a' => 1, 'b' => 2, 'c' => 3, 'd' => 4, 'e' => 5);
+   echo json_encode($arr);
+?>
+```
+
+```php
+<?php
+   class Emp {
+       public $name = "";
+       public $hobbies  = "";
+       public $birthdate = "";
+   }
+   $e = new Emp();
+   $e->name = "sachin";
+   $e->hobbies  = "sports";
+   $e->birthdate = date('m/d/Y h:i:s a', "8/5/1974 12:20:03 p");
+   $e->birthdate = date('m/d/Y h:i:s a', strtotime("8/5/1974 12:20:03"));
+
+   echo json_encode($e);
+?>
+```
+
+解析json
+
+```php
+<?php
+   $json = '{"a":1,"b":2,"c":3,"d":4,"e":5}';
+
+   var_dump(json_decode($json));
+   var_dump(json_decode($json, true));
+?>
+```
+
+以上代码执行结果为：
+
+```php
+object(stdClass)#1 (5) {
+    ["a"] => int(1)
+    ["b"] => int(2)
+    ["c"] => int(3)
+    ["d"] => int(4)
+    ["e"] => int(5)
+}
+
+array(5) {
+    ["a"] => int(1)
+    ["b"] => int(2)
+    ["c"] => int(3)
+    ["d"] => int(4)
+    ["e"] => int(5)
+}
+```
